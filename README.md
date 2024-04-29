@@ -18,10 +18,11 @@ magicoder
 ```
 
 ### Pre-Requisites
-GPU with at least 8GB
-miniconda
-zsh
-conda environment with vllm installed
+- GPU with at least 8GB
+- miniconda
+- zsh
+- conda environment with vllm installed
+
 ```sh
 conda create -n vllm python=3.9 -y
 conda activate vllm
