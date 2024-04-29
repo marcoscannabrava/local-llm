@@ -28,3 +28,9 @@ conda create -n vllm python=3.9 -y
 conda activate vllm
 pip install vllm
 ```
+
+```sh
+conda create -n magicoder python=3.9 -y
+conda activate magicoder
+pip install transformers torch accelerate autoawq
+```
