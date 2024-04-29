@@ -31,6 +31,8 @@ llm = LLM(
 
 outputs = llm.generate(prompt_template.format(prompt=prompt), sampling_params, use_tqdm=False)
 
+print("-------------------------------------------------------------------------------------------------------")
+print("-------------------------------------------------------------------------------------------------------")
 for output in outputs:
     prompt = output.prompt
     generated_text = output.outputs[0].text
