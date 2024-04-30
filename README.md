@@ -16,6 +16,9 @@ function @l() {
 
 ```
 
+![example](example.png)
+
+
 ### Pre-Requisites
 - GPU with at least 8GB
 - miniconda
