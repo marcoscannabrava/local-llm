@@ -19,7 +19,12 @@ function @l() {
 
 Serve via OpenAI compatible API server on localhost:8000
 ```sh
-vllm serve Qwen/Qwen2.5-Coder-1.5B
+vllm serve deepseek-ai/deepseek-coder-1.3b-instruct --trust-remote-code --max-model-len=8000 --api-key=123 
+
+# optionally to test it with aider
+export OPENAI_API_BASE=http://0.0.0.0:8000/v1
+export OPENAI_API_KEY=123
+aider --model openai/deepseek-ai/deepseek-coder-1.3b-instruct
 ```
 
 ![example](example.png)
@@ -35,3 +40,8 @@ conda create -n coder-slm python=3.12 -y
 conda activate coder-slm
 pip install vllm
 ```
+
+# Resources
+https://aider.chat/
+https://docs.vllm.ai
+https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-instruct
