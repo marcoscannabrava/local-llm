@@ -1,6 +1,8 @@
 # Useful Local LLM Scripts
 
 ## Usage
+
+Single prompt
 ```sh
 # Usage:
 function @l() {
@@ -13,7 +15,11 @@ function @l() {
 @l "example of Python reduce function"
 @l "linked list in Rust"
 @l "how to center a div"
+```
 
+Serve via OpenAI compatible API server on localhost:8000
+```sh
+vllm serve Qwen/Qwen2.5-Coder-1.5B
 ```
 
 ![example](example.png)
