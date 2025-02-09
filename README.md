@@ -63,6 +63,15 @@ function @l() {
 }
 ```
 
+# Usage with [Cline](https://github.com/cline/cline)
+Use the Ollama provider
+Base URL: http://localhost:8080
+Model ID: llamafile
+
+> Note: not all models will have sufficient context size to work with Cline
+> llama.cpp server default context size is 4096
+> Pass `-c, --ctx-size N` when starting the docker container to adjust
+
 # Resources
 [GitHub - ggerganov/llama.cpp: LLM inference in C/C++](https://github.com/ggerganov/llama.cpp)
 [GitHub - vllm-project/vllm: A high-throughput and memory-efficient inference and serving engine for LLMs](https://github.com/vllm-project/vllm)
