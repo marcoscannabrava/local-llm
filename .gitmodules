@@ -1,3 +1,6 @@
 [submodule "llama-models"]
 	path = llama-models
 	url = https://github.com/meta-llama/llama-models
+[submodule "deepseek-coder"]
+	path = deepseek-coder
+	url = git@github.com:marcoscannabrava/deepseek-coder.git

@@ -1,47 +1,37 @@
-# Useful Local LLM Scripts
+# Local [DeepSeek-Coder-V2-Lite-Instruct](https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct)
 
-## Usage
+# Quickstart
 
-Single prompt
-```sh
-# Usage:
-function @l() {
-    conda activate coder-slm
-    python $HOME/path_to/local-llm/qwen.py $@
-    conda deactivate
-}
-
-# Query LLM
-@l "example of Python reduce function"
-@l "linked list in Rust"
-@l "how to center a div"
-```
-
-Serve via OpenAI compatible API server on localhost:8000
-```sh
-vllm serve deepseek-ai/deepseek-coder-1.3b-instruct --trust-remote-code --max-model-len=8000 --api-key=123 
-
-# optionally to test it with aider
-export OPENAI_API_BASE=http://0.0.0.0:8000/v1
-export OPENAI_API_KEY=123
-aider --model openai/deepseek-ai/deepseek-coder-1.3b-instruct
-```
-
-![example](example.png)
-
-
-### Pre-Requisites
-- GPU with at least 8GB
-- miniconda
-- conda environment with vllm installed
+1. Start llama.cpp or vLLM OpenAI-compatible Server
+2. Use `llm` with the `llm-llamafile` plugin
 
 ```sh
-conda create -n coder-slm python=3.12 -y
-conda activate coder-slm
-pip install vllm
+# via llamafile
+docker run -d --runtime nvidia --gpus all -v ~/.cache/huggingface:/models -p 8080:8080 ghcr.io/ggerganov/llama.cpp:server -m /models/hub/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf -ngl 99
+
+# OR via vLLM
+docker run -d --runtime nvidia --gpus all \
+    -v ~/.cache/huggingface:/root/.cache/huggingface \
+    -p 8000:8000 \
+    --ipc=host \
+    vllm/vllm-openai:latest \
+    --max-model-len=8192 \
+    --trust-remote-code \
+    --gpu-memory-utilization=0.97 \
+    --cpu-offload-gb=10 \
+    --model deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct
+
+# example usage
+llm models default llamafile
+llm "write a linked list in Rust"
 ```
+
+# Requisites
+- Install [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- Install [llm](https://github.com/simonw/llm) and [llm-llamafile plugin](https://github.com/simonw/llm-llamafile)
 
 # Resources
-https://aider.chat/
-https://docs.vllm.ai
-https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-instruct
+[GitHub - ggerganov/llama.cpp: LLM inference in C/C++](https://github.com/ggerganov/llama.cpp)
+[GitHub - vllm-project/vllm: A high-throughput and memory-efficient inference and serving engine for LLMs](https://github.com/vllm-project/vllm)
+[GitHub - simonw/llm: Access large language models from the command-line](https://github.com/simonw/llm)
+[GitHub - simonw/llm-llamafile: Access llamafile localhost models via LLM](https://github.com/simonw/llm-llamafile)
